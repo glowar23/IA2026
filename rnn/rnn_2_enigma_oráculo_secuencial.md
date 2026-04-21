@@ -6,15 +6,15 @@
 ## 2.1 Actividad 2.1: Mapeo de Variables
 
 Dada la ecuación:
-
+$$
 h_t = tanh(W_hx x_t + W_hh h_{t-1} + b)
-
+$$
 **Identificación de cada componente según el poema:**
 
-- x_t  
+- $x_$t  
   "Soy la novedad pura, el pulso del instante, la matriz de características que el mundo me da en este segundo."
 
-- h_{t-1}  
+- $h_${t-1}  
   "el fantasma del pasado, que trae consigo el resumen de todo lo que hemos vivido hasta ayer."
 
 - W_hx, W_hh  
