@@ -6,73 +6,95 @@
 ## 2.1 Actividad 2.1: Mapeo de Variables
 
 Dada la ecuación:
+
 $$
-h_t = tanh(W_hx x_t + W_hh h_{t-1} + b)
+h_t = \tanh\left( W_{hx} \cdot x_t \;+\; W_{hh} \cdot h_{t-1} \;+\; b \right)
 $$
+
+
 **Identificación de cada componente según el poema:**
 
-- $x_$t  
+- $x_t$  
   "Soy la novedad pura, el pulso del instante, la matriz de características que el mundo me da en este segundo."
 
-- $h_${t-1}  
-  "el fantasma del pasado, que trae consigo el resumen de todo lo que hemos vivido hasta ayer."
+- $h_{t-1}$  
+  "Soy el fantasma del pasado, que trae consigo el resumen de todo lo que hemos vivido hasta ayer."
 
-- W_hx, W_hh  
-  "cruzamos por peajes inmutables, barreras que multiplican nuestra importancia y deciden qué tanto valemos."
+- $W_{hx}, W_{hh}$  
+  "Cruzamos por peajes inmutables, barreras que multiplican nuestra importancia y deciden qué tanto valemos."
 
-- b  
-  "un pequeño desvío inevitable"
+- $b$  
+  "Soy un pequeño desvío inevitable."
 
-- tanh  
-  "chocamos contra un muro curvo que nos comprime entre el -1 y el 1, evitando que nuestra energía explote hacia el infinito."
+- $\tanh$  
+  "Chocamos contra un muro curvo que nos comprime entre el -1 y el 1, evitando que nuestra energía explote hacia el infinito."
 
-- h_t  
+- $h_t$  
   "Al salir de esa curva, nazco yo, una nueva identidad. Soy tu estado actual, la respuesta de hoy, y estoy listo para ser el fantasma de tu mañana."
 
 ---
 
 ## 2.2 Actividad 2.2: Análisis de Dimensionalidad
 
-Datos:
-- x_t ∈ R^20
-- h_{t-1} ∈ R^64
+**Datos:**
 
-1. Dimensión de W_hx
+- $x_t \in \mathbb{R}^{20}$
+- $h_{t-1} \in \mathbb{R}^{64}$
 
-W_hx ∈ R^(64 x 20)
+**1. Dimensión de $W_{hx}$**
 
-2. Dimensión de W_hh
+$$
+W_{hx} \in \mathbb{R}^{64 \times 20}
+$$
 
-W_hh ∈ R^(64 x 64)
+**2. Dimensión de $W_{hh}$**
 
-3. Dimensión de h_t
+$$
+W_{hh} \in \mathbb{R}^{64 \times 64}
+$$
 
-h_t ∈ R^64
+**3. Dimensión de $h_t$**
+
+$$
+h_t \in \mathbb{R}^{64}
+$$
 
 ---
 
 ## 2.3 Actividad 2.3: La Estrofa Perdida
 
-Soy el leve empujón que rompe la simetría,  
-el susurro constante que evita el punto muerto.  
-No dependo del instante ni del eco del pasado,  
-pero inclino la balanza para que el destino no nazca en cero.
+> Soy el leve empujón que rompe la simetría,  
+> el susurro constante que evita el punto muerto.  
+> No dependo del instante ni del eco del pasado,  
+> pero inclino la balanza para que el destino no nazca en cero.
 
 ---
 
 ## 2.4 Actividad 2.4: Análisis de Saturación
 
-f(z) = tanh(z)  
-f'(z) = 1 - tanh^2(z)
+Sea:
 
-Para z = 500:
+$$
+f(z) = \tanh(z)
+$$
 
-tanh(500) ≈ 1  
-f'(500) = 0
+$$
+f'(z) = 1 - \tanh^2(z)
+$$
 
-Explicación:
+**Para $z = 500$:**
 
-Cuando la función se satura, su derivada tiende a cero, provocando el problema de vanishing gradient, donde la red deja de aprender porque los gradientes desaparecen.
+$$
+\tanh(500) \approx 1
+$$
+
+$$
+f'(500) \approx 0
+$$
+
+**Explicación:**
+
+Cuando la función se satura, su derivada tiende a cero, provocando el problema de *vanishing gradient*, donde la red deja de aprender porque los gradientes desaparecen durante la retropropagación.
 
 ---
 
@@ -80,32 +102,30 @@ Cuando la función se satura, su derivada tiende a cero, provocando el problema 
 
 El error debe atravesar:
 
-- La función tanh (derivada)
-- Las matrices W_hh
-- El estado h_{t-1}
+- La función $\tanh$ (a través de su derivada)
+- Las matrices $W_{hh}$
+- El estado $h_{t-1}$
 
-Operación matemática: regla de la cadena.
+**Operación matemática involucrada:**
 
-Problema: desaparición del gradiente por multiplicaciones sucesivas.
+Regla de la cadena.
+
+**Problema:**
+
+La desaparición del gradiente debido a multiplicaciones sucesivas de valores pequeños (especialmente en secuencias largas).
 
 ---
 
 ## 2.6 Actividad 2.6: Depuración del Oráculo
 
-Error:
+**Error detectado:**
 
-Uso de * (multiplicación elemento a elemento) en lugar de producto matricial.
+Uso de `*` (multiplicación elemento a elemento) en lugar de producto matricial.
 
-Corrección:
+**Corrección:**
 
 ```
 def paso_rnn_correcto(x_t, h_prev, W_hx, W_hh, b):
     combinacion = np.dot(W_hx, x_t) + np.dot(W_hh, h_prev) + b
     return np.tanh(combinacion)
-```
-
-Alternativa:
-
-```
-combinacion = (W_hx @ x_t) + (W_hh @ h_prev) + b
-```
+´´´
