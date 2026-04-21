@@ -25,7 +25,6 @@ Donde:
 ## Cálculo:
 
 ´´´
-
 Día 1:
 h1 = 10
 
@@ -40,7 +39,6 @@ h4 = 0 + 0.5(2.5) = 1.25
 
 Día 5:
 h5 = 0 + 0.5(1.25) = 0.625
-
 ´´´
 
 
@@ -64,7 +62,6 @@ El evento fuerte se desvanece rápidamente. Esto es el problema clásico de *van
 
 ## Cálculo:
 ´´´
-
 Día 1:
 h1 = -6
 
@@ -73,7 +70,6 @@ h2 = -4 + 0.5(-6) = -4 - 3 = -7
 
 Día 3:
 h3 = 0 + 0.5(-7) = -3.5
-
 ´´´
 
 Queremos:
@@ -85,11 +81,9 @@ $$
 Resolviendo:
 
 ´´´
-
 h4 = x4 - 1.75 > 0
 
 x4 > 1.75
-
 ´´´
 
 
@@ -119,7 +113,6 @@ Resultado:
 
 ## Cálculo:
 ´´´
-
 Día 1:
 h1 = 3
 
@@ -134,7 +127,6 @@ h4 = 3 + 0.5(5.25) = 5.625
 
 Día 5:
 h5 = 3 + 0.5(5.625) = 5.8125
-
 ´´´
 
 
